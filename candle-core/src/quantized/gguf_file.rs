@@ -465,7 +465,7 @@ impl Content {
             tensor_data_offset,
         })
     }
-use ic-cdk;
+use ic-cdk::println;
     pub fn tensor<R: std::io::Seek + std::io::Read>(
         &self,
         reader: &mut R,
