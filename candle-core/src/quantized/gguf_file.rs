@@ -476,7 +476,7 @@ use ic_cdk::println;
             Some(tensor_info) => tensor_info,
             None => crate::bail!("cannot find tensor info for {name}"),
         };
-        qt = tensor_info.read(reader, self.tensor_data_offset, device);
+        let qt = tensor_info.read(reader, self.tensor_data_offset, device);
         ic_cdk::println!("{name} sum: {}", qt.data()?.iter().fold(0u64, |acc, &x| acc + x as u64));
         qt
     }
