@@ -465,7 +465,7 @@ impl Content {
             tensor_data_offset,
         })
     }
-
+use ic-cdk;
     pub fn tensor<R: std::io::Seek + std::io::Read>(
         &self,
         reader: &mut R,
@@ -476,7 +476,9 @@ impl Content {
             Some(tensor_info) => tensor_info,
             None => crate::bail!("cannot find tensor info for {name}"),
         };
-        tensor_info.read(reader, self.tensor_data_offset, device)
+        qt = tensor_info.read(reader, self.tensor_data_offset, device)
+        ic-cdk::println!("{name} sum: {}", qt.data()?.iter().fold(0u64, |acc, &x| acc + x as u64));
+        qt
     }
 }
 
