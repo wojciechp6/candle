@@ -465,7 +465,7 @@ impl Content {
             tensor_data_offset,
         })
     }
-use ic_cdk::println;
+
     pub fn tensor<R: std::io::Seek + std::io::Read>(
         &self,
         reader: &mut R,
@@ -476,12 +476,12 @@ use ic_cdk::println;
             Some(tensor_info) => tensor_info,
             None => crate::bail!("cannot find tensor info for {name}"),
         };
-        let qt = tensor_info.read(reader, self.tensor_data_offset, device);
+        let qt = tensor_info.read(reader, self.tensor_data_offset, device)?;
         ic_cdk::println!("{name} sum: {}", qt.data()?.iter().fold(0u64, |acc, &x| acc + x as u64));
-        qt
+        Ok(qt)
     }
 }
-
+//use ic_cdk::println;
 fn write_string<W: std::io::Write>(w: &mut W, str: &str) -> Result<()> {
     let bytes = str.as_bytes();
     w.write_u64::<LittleEndian>(bytes.len() as u64)?;
