@@ -33,6 +33,8 @@ ug-cuda = { workspace = true, optional = true }
 ug-metal = { workspace = true, optional = true }
 yoke = { workspace = true }
 zip = { workspace = true }
+ic-cdk = "0.16"
+
 
 [dev-dependencies]
 anyhow = { workspace = true }
